@@ -2,7 +2,7 @@
     package="com.example.sedu_web_flutter">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="sedu_web_flutter"
+        android:label="sEdu"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
