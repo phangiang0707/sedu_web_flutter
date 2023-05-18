@@ -44,10 +44,12 @@ class _Login_pageState extends State<Login_page> {
       body: Container(
           width: double.infinity,
           height: double.infinity,
-          padding: EdgeInsets.symmetric(vertical: 150),
+          //padding: EdgeInsets.symmetric(vertical: 150),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              SizedBox(
+                height: 50,
+              ),
               Align(
                   alignment: Alignment.center,
                   child: Image.asset('images/logo__image.png')),
@@ -64,7 +66,7 @@ class _Login_pageState extends State<Login_page> {
                     height: 20,
                   ),
                   Container(
-                    width: 500,
+                    width: 400,
                     child: TextFormField(
                       controller: _txtEmail,
                       decoration: InputDecoration(
