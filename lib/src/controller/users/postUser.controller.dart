@@ -1,18 +1,24 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import '../../model/otd/users/user.otd.dart';
+import '../../model/otd/users/postUser.otd.dart';
 import '../../utils/url.dart';
 
-class postUserController {
-  Future<List<UserOtd>> postUser() async {
-    final response = await http.post(Uri.parse('${url}users/register'));
+class PostUserController {
+  Future<PostUserOtd?> postUser(PostUserOtd postUserOtd) async {
+    final response = await http.post(
+      Uri.parse('${url}users/register'),
+      body: postUserOtdToJson(postUserOtd),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    );
     print(response.statusCode);
     print(response.body);
     if (response.statusCode == 200) {
-      return userOtdFromJson(response.body);
+      return postUserOtdFromJson(response.body);
     } else {
-      return [];
+      return null;
     }
   }
 }
