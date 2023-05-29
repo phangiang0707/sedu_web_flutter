@@ -182,7 +182,7 @@ class _AddTimnigs_pageState extends State<AddTimnigs_page> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                width: 10,
               ),
               InkWell(
                 onTap: () {

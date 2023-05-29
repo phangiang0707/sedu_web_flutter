@@ -44,10 +44,11 @@ class _FixClassState extends State<FixClass> {
     _getDetailClassController = GetDetailClassController();
     _getDetailClassController!.getDetailClassOtd(widget.id).then((value) {
       setState(() {
-        setState(() {
-          _getDetailClassOtd = value;
+        _getDetailClassOtd = value;
 
-          //_txtCourseID.text = _getDetailClassOtd!.course!.id;
+        //_txtCourseID.text = _getDetailClassOtd!.course!.id;
+        if (_getDetailClassOtd!.zaloGroupChatName == null &&
+            _getDetailClassOtd!.zaloGroupChatName == null) {
           _txtDescription.text = _getDetailClassOtd!.description;
           _txtRules.text = _getDetailClassOtd!.rules;
           _txtStartDate.text =
@@ -55,9 +56,9 @@ class _FixClassState extends State<FixClass> {
           _txtEndDate.text =
               '${_getDetailClassOtd!.endDate.day}/${_getDetailClassOtd!.endDate.month}/${_getDetailClassOtd!.endDate.year}';
           _txtName.text = _getDetailClassOtd!.name;
-          _txtCode.text = _getDetailClassOtd!.code!;
+          _txtCode.text = _getDetailClassOtd!.code;
           _txtRules.text = _getDetailClassOtd!.rules;
-        });
+        }
       });
     });
     _getCoursesController!.getCourses().then((value) {
@@ -83,7 +84,7 @@ class _FixClassState extends State<FixClass> {
                         },
                         icon: Icon(Icons.arrow_back_ios_new_outlined)),
                     Text(
-                      "Thêm lớp học",
+                      "Sửa lớp học",
                       style: GoogleFonts.inter(
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
@@ -211,9 +212,9 @@ class _FixClassState extends State<FixClass> {
                           width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    labelText: "Chọn ngày bắt đầu khóa học",
+                    labelText: "Chọn ngày bắt đầu lớp học",
                     border: OutlineInputBorder(),
-                    hintText: "Chọn ngày bắt đầu khóa học",
+                    hintText: "Chọn ngày bắt đầu lớp học",
                   ),
                 ),
                 SizedBox(
@@ -242,9 +243,9 @@ class _FixClassState extends State<FixClass> {
                           width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    labelText: "Chọn ngày kết thúc khóa học",
+                    labelText: "Chọn ngày kết thúc lớp học",
                     border: OutlineInputBorder(),
-                    hintText: "Chọn ngày kết thúc khóa học",
+                    hintText: "Chọn ngày kết thúc lớp học",
                   ),
                 ),
                 SizedBox(
@@ -258,7 +259,7 @@ class _FixClassState extends State<FixClass> {
                             name: _txtName.text,
                             code: _txtCode.text,
                             description: _txtDescription.text,
-                            courseId: _getDetailClassOtd!.course!.id,
+                            courseId: _getDetailClassOtd!.course.id,
                             rules: _txtRules.text,
                             startDate: startDate,
                             endDate: endDate));

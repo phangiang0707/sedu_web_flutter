@@ -198,12 +198,16 @@ class _PostUser_pageState extends State<PostUser_page> {
             InkWell(
               onTap: () {
                 isEmail(_txtEmail.text) && int.parse(_txtPhone.text) == 10
-                    ? _postUserController!.postUser(PostUserOtd(
-                        name: _txtName.text,
-                        email: _txtEmail.text,
-                        phone: _txtPhone.text,
-                        avatarUrl: _image,
-                        birthday: birthday))
+                    ? _postUserController!
+                        .postUser(PostUserOtd(
+                            name: _txtName.text,
+                            email: _txtEmail.text,
+                            phone: _txtPhone.text,
+                            avatarUrl: _image,
+                            birthday: birthday))
+                        .then((value) {
+                        Navigator.pop(context);
+                      })
                     : print('Error register');
               },
               child: Container(

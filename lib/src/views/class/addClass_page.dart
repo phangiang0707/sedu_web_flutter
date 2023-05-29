@@ -187,9 +187,9 @@ class _AddClass_pageState extends State<AddClass_page> {
                           width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    labelText: "Chọn ngày bắt đầu khóa học",
+                    labelText: "Chọn ngày bắt đầu lớp học",
                     border: OutlineInputBorder(),
-                    hintText: "Chọn ngày bắt đầu khóa học",
+                    hintText: "Chọn ngày bắt đầu lớp học",
                   ),
                 ),
                 SizedBox(
@@ -218,9 +218,9 @@ class _AddClass_pageState extends State<AddClass_page> {
                           width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    labelText: "Chọn ngày kết thúc khóa học",
+                    labelText: "Chọn ngày kết thúc lớp học",
                     border: OutlineInputBorder(),
-                    hintText: "Chọn ngày kết thúc khóa học",
+                    hintText: "Chọn ngày kết thúc lớp học",
                   ),
                 ),
                 SizedBox(
