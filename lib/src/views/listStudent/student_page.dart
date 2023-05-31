@@ -99,12 +99,14 @@ class _Student_pageState extends State<Student_page> {
                   height: 10,
                 ),
                 _listStudentOtd != null
-                    ? SingleChildScrollView(
-                        child: Column(
-                            children: _listStudentOtd!
-                                .map((e) => ContainerStudent(
-                                    getStudentOtd: e, id: widget.id))
-                                .toList()),
+                    ? Container(
+                        child: SingleChildScrollView(
+                          child: Column(
+                              children: _listStudentOtd!
+                                  .map((e) => ContainerStudent(
+                                      getStudentOtd: e, id: widget.id))
+                                  .toList()),
+                        ),
                       )
                     : CircularProgressIndicator(),
               ],

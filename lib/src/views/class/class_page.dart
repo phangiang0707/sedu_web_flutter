@@ -90,13 +90,15 @@ class _Class_pageState extends State<Class_page> {
                 height: 10,
               ),
               _listClassOtd != null
-                  ? SingleChildScrollView(
-                      child: Column(
-                          children: _listClassOtd
-                              .map((e) => ContainerClass(
-                                    getClassOtd: e,
-                                  ))
-                              .toList()),
+                  ? Container(
+                      child: SingleChildScrollView(
+                        child: Column(
+                            children: _listClassOtd
+                                .map((e) => ContainerClass(
+                                      getClassOtd: e,
+                                    ))
+                                .toList()),
+                      ),
                     )
                   : SizedBox()
             ]),

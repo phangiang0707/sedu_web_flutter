@@ -26,6 +26,8 @@ class _ListStudent_Teacher_pageState extends State<ListStudent_Teacher_page> {
   GetDetailClassController? _getDetailClassController;
   GetDetailClassOtd? getDetailClassOtd;
   String error = '';
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
   @override
   void initState() {
     // TODO: implement initState
@@ -45,106 +47,111 @@ class _ListStudent_Teacher_pageState extends State<ListStudent_Teacher_page> {
     return DefaultTabController(
         length: 3,
         child: getDetailClassOtd != null
-            ? Scaffold(
-                appBar: AppBar(
-                  bottom: TabBar(
-                    tabs: [
-                      Tab(
-                        text: "Lịch học",
+            ? RefreshIndicator(
+                key: _refreshIndicatorKey,
+                onRefresh: () async {
+                  _getDetailClassController!
+                      .getDetailClassOtd(widget.id)
+                      .then((value) {
+                    setState(() {
+                      getDetailClassOtd = value;
+                    });
+                  });
+                },
+                child: Scaffold(
+                    appBar: AppBar(
+                      bottom: TabBar(
+                        tabs: [
+                          Tab(
+                            text: "Lịch học",
+                          ),
+                          Tab(
+                            text: "Học viên",
+                          ),
+                          Tab(
+                            text: "Giáo viên",
+                          ),
+                        ],
                       ),
-                      Tab(
-                        text: "Học viên",
-                      ),
-                      Tab(
-                        text: "Giáo viên",
-                      ),
-                    ],
-                  ),
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Danh sách lớp học'),
-                      getDetailClassOtd!.zaloGroupChatUrl == null
-                          ? InkWell(
-                              onTap: () {
-                                _createGroupChatController!
-                                    .createGroupChat(widget.id)
-                                    .then((value) {
-                                  if (value != null) {
-                                    setState(() {
-                                      error = "Tạo nhóm chat thành công";
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Danh sách lớp học'),
+                          getDetailClassOtd!.zaloGroupChatUrl == null
+                              ? InkWell(
+                                  onTap: () {
+                                    _createGroupChatController!
+                                        .createGroupChat(widget.id);
+                                    Future.delayed(Duration(milliseconds: 5));
+                                    _refreshIndicatorKey.currentState?.show();
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 5, horizontal: 10),
+                                    decoration: BoxDecoration(
+                                        color: Color.fromRGBO(0, 145, 255, 1),
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                          color: Colors.white,
+                                        )),
+                                    child: Text(
+                                      "Tạo nhóm chat",
+                                      style: GoogleFonts.inter(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                )
+                              : InkWell(
+                                  onTap: () {
+                                    _removeGroupChatController!
+                                        .removeGroupChat(widget.id)
+                                        .then((value) {
+                                      if (value != null) {
+                                        setState(() {
+                                          error = "Xóa nhóm chat thành công";
+                                        });
+                                        _refreshIndicatorKey.currentState
+                                            ?.show();
+                                      } else {
+                                        setState(() {
+                                          error = "Lỗi khi xóa";
+                                        });
+                                      }
                                     });
-                                  } else {
-                                    setState(() {
-                                      error = "Lỗi khi tạo";
-                                    });
-                                  }
-                                });
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 10),
-                                decoration: BoxDecoration(
-                                    color: Color.fromRGBO(0, 145, 255, 1),
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                      color: Colors.white,
-                                    )),
-                                child: Text(
-                                  "Tạo nhóm chat",
-                                  style: GoogleFonts.inter(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white),
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 5, horizontal: 10),
+                                    decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                          color: Colors.white,
+                                        )),
+                                    child: Text(
+                                      "Xóa nhóm chat",
+                                      style: GoogleFonts.inter(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            )
-                          : InkWell(
-                              onTap: () {
-                                _removeGroupChatController!
-                                    .removeGroupChat(widget.id)
-                                    .then((value) {
-                                  if (value != null) {
-                                    setState(() {
-                                      error = "Xóa nhóm chat thành công";
-                                    });
-                                  } else {
-                                    setState(() {
-                                      error = "Lỗi khi xóa";
-                                    });
-                                  }
-                                });
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 10),
-                                decoration: BoxDecoration(
-                                    color: Colors.red,
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                      color: Colors.white,
-                                    )),
-                                child: Text(
-                                  "Xóa nhóm chat",
-                                  style: GoogleFonts.inter(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white),
-                                ),
-                              ),
-                            ),
-                    ],
-                  ),
-                ),
-                body: TabBarView(
-                  children: [
-                    Timings_page(
-                      id: widget.id,
+                        ],
+                      ),
                     ),
-                    Student_page(id: widget.id),
-                    Teacher_page(id: widget.id)
-                  ],
-                ))
+                    body: TabBarView(
+                      children: [
+                        Timings_page(
+                          id: widget.id,
+                        ),
+                        Student_page(id: widget.id),
+                        Teacher_page(id: widget.id)
+                      ],
+                    )),
+              )
             : Center(
                 child: Container(
                     height: 20,

@@ -89,12 +89,14 @@ class _User_pageState extends State<User_page> {
                 ),
                 _userOtd != null
                     ? Container(
-                        child: Column(
-                          children: _userOtd!
-                              .map((e) => ContainerUser(
-                                    userOtd: e,
-                                  ))
-                              .toList(),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: _userOtd!
+                                .map((e) => ContainerUser(
+                                      userOtd: e,
+                                    ))
+                                .toList(),
+                          ),
                         ),
                       )
                     : CircularProgressIndicator()

@@ -97,13 +97,15 @@ class _Lesson_pageState extends State<Lesson_page> {
                 height: 10,
               ),
               _listLessonOtd != null
-                  ? Column(
-                      children: _listLessonOtd!
-                          .map((e) => ContainerLesson(
-                                getLessonOtd: e,
-                                id: widget.id,
-                              ))
-                          .toList())
+                  ? SingleChildScrollView(
+                      child: Column(
+                          children: _listLessonOtd!
+                              .map((e) => ContainerLesson(
+                                    getLessonOtd: e,
+                                    id: widget.id,
+                                  ))
+                              .toList()),
+                    )
                   : SizedBox()
             ]),
           ),

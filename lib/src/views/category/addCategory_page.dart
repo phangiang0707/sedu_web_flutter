@@ -29,12 +29,21 @@ class _AddCategory_pageState extends State<AddCategory_page> {
           margin: EdgeInsets.symmetric(vertical: 20),
           width: 500,
           child: Column(children: [
-            Text(
-              "Danh mục",
-              style: GoogleFonts.inter(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black),
+            Row(
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.arrow_back_ios_new_outlined)),
+                Text(
+                  "Danh mục",
+                  style: GoogleFonts.inter(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black),
+                ),
+              ],
             ),
             SizedBox(
               height: 10,

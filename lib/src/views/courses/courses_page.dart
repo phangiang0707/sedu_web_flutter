@@ -87,13 +87,15 @@ class _Courses_pageState extends State<Courses_page> {
                   ],
                 ),
                 _listOfCourses != null
-                    ? SingleChildScrollView(
-                        child: Column(
-                            children: _listOfCourses!
-                                .map((e) => ContainerCourses(
-                                      getCourseOtd: e,
-                                    ))
-                                .toList()),
+                    ? Container(
+                        child: SingleChildScrollView(
+                          child: Column(
+                              children: _listOfCourses!
+                                  .map((e) => ContainerCourses(
+                                        getCourseOtd: e,
+                                      ))
+                                  .toList()),
+                        ),
                       )
                     : CircularProgressIndicator(),
               ],
