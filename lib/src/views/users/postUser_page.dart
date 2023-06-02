@@ -200,7 +200,7 @@ class _PostUser_pageState extends State<PostUser_page> {
                 ),
                 InkWell(
                   onTap: () {
-                    isEmail(_txtEmail.text) && int.parse(_txtPhone.text) == 10
+                    isEmail(_txtEmail.text) && _txtPhone.text.length == 10
                         ? _postUserController!
                             .postUser(PostUserOtd(
                                 name: _txtName.text,

@@ -15,6 +15,7 @@ class Login_page extends StatefulWidget {
 
 class _Login_pageState extends State<Login_page> {
   TextEditingController _txtEmail = TextEditingController();
+  TextEditingController _txtPass = TextEditingController();
   LoginController? _loginController;
   bool isEmail(String string) {
     // Null or empty string is invalid
@@ -68,27 +69,56 @@ class _Login_pageState extends State<Login_page> {
                     ),
                     Container(
                       width: 400,
-                      child: TextFormField(
-                        controller: _txtEmail,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                width: 1,
-                                color: Color.fromRGBO(
-                                    23, 161, 250, 1)), //<-- SEE HERE
-                            borderRadius: BorderRadius.circular(15),
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            controller: _txtEmail,
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    width: 1,
+                                    color: Color.fromRGBO(
+                                        23, 161, 250, 1)), //<-- SEE HERE
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    width: 1,
+                                    color: Color.fromRGBO(23, 161, 250, 1)),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              labelText: "Email",
+                              border: const OutlineInputBorder(),
+                              hintText: "Email",
+                            ),
+                            keyboardType: TextInputType.emailAddress,
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                width: 1,
-                                color: Color.fromRGBO(23, 161, 250, 1)),
-                            borderRadius: BorderRadius.circular(15),
+                          SizedBox(
+                            height: 10,
                           ),
-                          labelText: "Email",
-                          border: const OutlineInputBorder(),
-                          hintText: "Email",
-                        ),
-                        keyboardType: TextInputType.emailAddress,
+                          TextFormField(
+                            controller: _txtPass,
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    width: 1,
+                                    color: Color.fromRGBO(
+                                        23, 161, 250, 1)), //<-- SEE HERE
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    width: 1,
+                                    color: Color.fromRGBO(23, 161, 250, 1)),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              labelText: "Password",
+                              border: const OutlineInputBorder(),
+                              hintText: "Password",
+                            ),
+                            //keyboardType: TextInputType.emailAddress,
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(
@@ -96,7 +126,7 @@ class _Login_pageState extends State<Login_page> {
                     ),
                     InkWell(
                       onTap: () {
-                        isEmail(_txtEmail.text)
+                        isEmail(_txtEmail.text) && _txtPass.text == 'admin'
                             ? _loginController!
                                 .login(_txtEmail.text)
                                 .then((value) {
