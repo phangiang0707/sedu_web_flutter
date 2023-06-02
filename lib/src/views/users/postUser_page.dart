@@ -67,166 +67,171 @@ class _PostUser_pageState extends State<PostUser_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: SingleChildScrollView(
         child: Container(
-          width: 500,
-          child: Column(children: [
-            Row(
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(Icons.arrow_back_ios_new_outlined)),
-                Text(
-                  "Thêm user",
-                  style: GoogleFonts.inter(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black),
+          width: double.infinity,
+          child: Center(
+            child: Container(
+              width: 500,
+              child: Column(children: [
+                Row(
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pop(context, 'refresh');
+                        },
+                        icon: Icon(Icons.arrow_back_ios_new_outlined)),
+                    Text(
+                      "Thêm user",
+                      style: GoogleFonts.inter(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextFormField(
-              controller: _txtName,
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
-                  borderRadius: BorderRadius.circular(15),
+                SizedBox(
+                  height: 10,
                 ),
-                labelText: "Tên user",
-                border: OutlineInputBorder(),
-                hintText: "Tên user",
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextFormField(
-              controller: _txtEmail,
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
-                  borderRadius: BorderRadius.circular(15),
+                TextFormField(
+                  controller: _txtName,
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    labelText: "Tên user",
+                    border: OutlineInputBorder(),
+                    hintText: "Tên user",
+                  ),
                 ),
-                labelText: "Email",
-                border: OutlineInputBorder(),
-                hintText: "Email",
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextFormField(
-              controller: _txtPhone,
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
-                  borderRadius: BorderRadius.circular(15),
+                SizedBox(
+                  height: 10,
                 ),
-                labelText: "Số điện thoại",
-                border: OutlineInputBorder(),
-                hintText: "Số điện thoại",
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextFormField(
-              controller: _txtBirthday,
-              onTap: () async {
-                DateTime? datimePicker = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(2000),
-                    lastDate: DateTime(2101));
-                if (datimePicker != null) {
-                  setState(() {
-                    birthday = datimePicker;
-                    _txtBirthday.text =
-                        DateFormat('dd/MM/yyyy').format(datimePicker);
-                  });
-                }
-              },
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
-                  borderRadius: BorderRadius.circular(15),
+                TextFormField(
+                  controller: _txtEmail,
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    labelText: "Email",
+                    border: OutlineInputBorder(),
+                    hintText: "Email",
+                  ),
                 ),
-                labelText: "Ngày sinh",
-                border: OutlineInputBorder(),
-                hintText: "Ngày sinh",
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              height: 100,
-              width: double.infinity,
-              child: _pickImage == null
-                  ? InkWell(
-                      onTap: () {
-                        pickImage();
-                      },
-                      child: DottedBorder(
-                        color: const Color.fromRGBO(48, 48, 48, 1),
-                        dashPattern: const [10],
-                        child: Center(
-                          child: Text(
-                            "Chọn hình ảnh",
-                            style: GoogleFonts.inter(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: Color.fromRGBO(0, 0, 0, 0.8)),
+                SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  controller: _txtPhone,
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    labelText: "Số điện thoại",
+                    border: OutlineInputBorder(),
+                    hintText: "Số điện thoại",
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  controller: _txtBirthday,
+                  onTap: () async {
+                    DateTime? datimePicker = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2101));
+                    if (datimePicker != null) {
+                      setState(() {
+                        birthday = datimePicker;
+                        _txtBirthday.text =
+                            DateFormat('dd/MM/yyyy').format(datimePicker);
+                      });
+                    }
+                  },
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    labelText: "Ngày sinh",
+                    border: OutlineInputBorder(),
+                    hintText: "Ngày sinh",
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 100,
+                  width: double.infinity,
+                  child: _pickImage == null
+                      ? InkWell(
+                          onTap: () {
+                            pickImage();
+                          },
+                          child: DottedBorder(
+                            color: const Color.fromRGBO(48, 48, 48, 1),
+                            dashPattern: const [10],
+                            child: Center(
+                              child: Text(
+                                "Chọn hình ảnh",
+                                style: GoogleFonts.inter(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color.fromRGBO(0, 0, 0, 0.8)),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    )
-                  : Image.memory(_pickImage!),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            InkWell(
-              onTap: () {
-                isEmail(_txtEmail.text) && int.parse(_txtPhone.text) == 10
-                    ? _postUserController!
-                        .postUser(PostUserOtd(
-                            name: _txtName.text,
-                            email: _txtEmail.text,
-                            phone: _txtPhone.text,
-                            avatarUrl: _image,
-                            birthday: birthday))
-                        .then((value) {
-                        Navigator.pop(context);
-                      })
-                    : print('Error register');
-              },
-              child: Container(
-                width: 100,
-                height: 30,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color.fromRGBO(23, 161, 250, 1)),
-                child: Text(
-                  "Thêm",
-                  style: GoogleFonts.inter(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white),
+                        )
+                      : Image.memory(_pickImage!),
                 ),
-              ),
-            )
-          ]),
+                SizedBox(
+                  height: 10,
+                ),
+                InkWell(
+                  onTap: () {
+                    isEmail(_txtEmail.text) && int.parse(_txtPhone.text) == 10
+                        ? _postUserController!
+                            .postUser(PostUserOtd(
+                                name: _txtName.text,
+                                email: _txtEmail.text,
+                                phone: _txtPhone.text,
+                                avatarUrl: _image,
+                                birthday: birthday))
+                            .then((value) {
+                            Navigator.pop(context, 'refresh');
+                          })
+                        : print('Error register');
+                  },
+                  child: Container(
+                    width: 100,
+                    height: 30,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Color.fromRGBO(23, 161, 250, 1)),
+                    child: Text(
+                      "Thêm",
+                      style: GoogleFonts.inter(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white),
+                    ),
+                  ),
+                )
+              ]),
+            ),
+          ),
         ),
       ),
     );

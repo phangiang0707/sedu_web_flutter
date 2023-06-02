@@ -59,220 +59,223 @@ class _Timings_pageState extends State<Timings_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          width: 500,
-          child: RefreshIndicator(
-            key: _refreshIndicatorKey,
-            onRefresh: () async {
-              _getTimingsController!.getTiming(widget.id).then((value) {
-                setState(() {
-                  _listTimings2.clear();
-                  _listTimings3.clear();
-                  _listTimings4.clear();
-                  _listTimings5.clear();
-                  _listTimings6.clear();
-                  _listTimings7.clear();
-                  _listTimingsCN.clear();
-                  _listTimingsOtd!.clear();
-                  _listTimingsOtd = value;
-                  _listTimingsOtd!.forEach((element) {
-                    if (element.day == 0) {
-                      _listTimings2.add(element);
-                    } else if (element.day == 1) {
-                      _listTimings3.add(element);
-                    } else if (element.day == 2) {
-                      _listTimings4.add(element);
-                    } else if (element.day == 3) {
-                      _listTimings5.add(element);
-                    } else if (element.day == 4) {
-                      _listTimings6.add(element);
-                    } else if (element.day == 5) {
-                      _listTimings7.add(element);
-                    } else if (element.day == 6) {
-                      _listTimingsCN.add(element);
-                    }
-                  });
-                });
+      body: RefreshIndicator(
+        key: _refreshIndicatorKey,
+        onRefresh: () async {
+          _getTimingsController!.getTiming(widget.id).then((value) {
+            setState(() {
+              _listTimings2.clear();
+              _listTimings3.clear();
+              _listTimings4.clear();
+              _listTimings5.clear();
+              _listTimings6.clear();
+              _listTimings7.clear();
+              _listTimingsCN.clear();
+              _listTimingsOtd!.clear();
+              _listTimingsOtd = value;
+              _listTimingsOtd!.forEach((element) {
+                if (element.day == 0) {
+                  _listTimings2.add(element);
+                } else if (element.day == 1) {
+                  _listTimings3.add(element);
+                } else if (element.day == 2) {
+                  _listTimings4.add(element);
+                } else if (element.day == 3) {
+                  _listTimings5.add(element);
+                } else if (element.day == 4) {
+                  _listTimings6.add(element);
+                } else if (element.day == 5) {
+                  _listTimings7.add(element);
+                } else if (element.day == 6) {
+                  _listTimingsCN.add(element);
+                }
               });
-            },
-            child: SingleChildScrollView(
-              child: Column(children: [
-                Row(
-                  children: [
-                    Text(
-                      "Lịch học",
-                      style: GoogleFonts.inter(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AddTimnigs_page(
-                                        id: widget.id,
-                                      )));
-                        },
-                        child: Text(
-                          "Thêm lịch học",
-                          style: GoogleFonts.inter(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                              color: Color.fromRGBO(23, 161, 250, 1)),
-                        )),
-                    TextButton(
-                        onPressed: () {
-                          _refreshIndicatorKey.currentState?.show();
-                        },
-                        child: Text("Tải lại",
+            });
+          });
+        },
+        child: SingleChildScrollView(
+          child: Container(
+            width: double.infinity,
+            child: Center(
+              child: Container(
+                width: 500,
+                child: Column(children: [
+                  Row(
+                    children: [
+                      Text(
+                        "Lịch học",
+                        style: GoogleFonts.inter(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AddTimnigs_page(
+                                          id: widget.id,
+                                        )));
+                          },
+                          child: Text(
+                            "Thêm lịch học",
                             style: GoogleFonts.inter(
                                 fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: Color.fromRGBO(23, 161, 250, 1)))),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Thứ 2",
-                  style: GoogleFonts.inter(
-                      fontSize: 18, fontWeight: FontWeight.w400),
-                ),
-                Divider(),
-                _listTimings2 != null
-                    ? Column(
-                        children: _listTimings2
-                            .map((e) => ContainerTimings(
-                                  getTimingsOtd: e,
-                                  id: widget.id,
-                                ))
-                            .toList(),
-                      )
-                    : SizedBox(),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Thứ 3",
-                  style: GoogleFonts.inter(
-                      fontSize: 18, fontWeight: FontWeight.w400),
-                ),
-                Divider(),
-                _listTimings2 != null
-                    ? Column(
-                        children: _listTimings3
-                            .map((e) => ContainerTimings(
-                                  getTimingsOtd: e,
-                                  id: widget.id,
-                                ))
-                            .toList(),
-                      )
-                    : SizedBox(),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Thứ 4",
-                  style: GoogleFonts.inter(
-                      fontSize: 18, fontWeight: FontWeight.w400),
-                ),
-                Divider(),
-                _listTimings2 != null
-                    ? Column(
-                        children: _listTimings4
-                            .map((e) => ContainerTimings(
-                                  getTimingsOtd: e,
-                                  id: widget.id,
-                                ))
-                            .toList(),
-                      )
-                    : SizedBox(),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Thứ 5",
-                  style: GoogleFonts.inter(
-                      fontSize: 18, fontWeight: FontWeight.w400),
-                ),
-                Divider(),
-                _listTimings2 != null
-                    ? Column(
-                        children: _listTimings5
-                            .map((e) => ContainerTimings(
-                                  getTimingsOtd: e,
-                                  id: widget.id,
-                                ))
-                            .toList(),
-                      )
-                    : SizedBox(),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Thứ 6",
-                  style: GoogleFonts.inter(
-                      fontSize: 18, fontWeight: FontWeight.w400),
-                ),
-                Divider(),
-                _listTimings2 != null
-                    ? Column(
-                        children: _listTimings6
-                            .map((e) => ContainerTimings(
-                                  getTimingsOtd: e,
-                                  id: widget.id,
-                                ))
-                            .toList(),
-                      )
-                    : SizedBox(),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Thứ 7",
-                  style: GoogleFonts.inter(
-                      fontSize: 18, fontWeight: FontWeight.w400),
-                ),
-                Divider(),
-                _listTimings2 != null
-                    ? Column(
-                        children: _listTimings7
-                            .map((e) => ContainerTimings(
-                                  getTimingsOtd: e,
-                                  id: widget.id,
-                                ))
-                            .toList(),
-                      )
-                    : SizedBox(),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Chủ nhật",
-                  style: GoogleFonts.inter(
-                      fontSize: 18, fontWeight: FontWeight.w400),
-                ),
-                Divider(),
-                _listTimings2 != null
-                    ? Column(
-                        children: _listTimingsCN
-                            .map((e) => ContainerTimings(
-                                  getTimingsOtd: e,
-                                  id: widget.id,
-                                ))
-                            .toList(),
-                      )
-                    : SizedBox(),
-              ]),
+                                fontWeight: FontWeight.w700,
+                                color: Color.fromRGBO(23, 161, 250, 1)),
+                          )),
+                      TextButton(
+                          onPressed: () {
+                            _refreshIndicatorKey.currentState?.show();
+                          },
+                          child: Text("Tải lại",
+                              style: GoogleFonts.inter(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color.fromRGBO(23, 161, 250, 1)))),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Thứ 2",
+                    style: GoogleFonts.inter(
+                        fontSize: 18, fontWeight: FontWeight.w400),
+                  ),
+                  Divider(),
+                  _listTimings2 != null
+                      ? Column(
+                          children: _listTimings2
+                              .map((e) => ContainerTimings(
+                                    getTimingsOtd: e,
+                                    id: widget.id,
+                                  ))
+                              .toList(),
+                        )
+                      : SizedBox(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Thứ 3",
+                    style: GoogleFonts.inter(
+                        fontSize: 18, fontWeight: FontWeight.w400),
+                  ),
+                  Divider(),
+                  _listTimings2 != null
+                      ? Column(
+                          children: _listTimings3
+                              .map((e) => ContainerTimings(
+                                    getTimingsOtd: e,
+                                    id: widget.id,
+                                  ))
+                              .toList(),
+                        )
+                      : SizedBox(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Thứ 4",
+                    style: GoogleFonts.inter(
+                        fontSize: 18, fontWeight: FontWeight.w400),
+                  ),
+                  Divider(),
+                  _listTimings2 != null
+                      ? Column(
+                          children: _listTimings4
+                              .map((e) => ContainerTimings(
+                                    getTimingsOtd: e,
+                                    id: widget.id,
+                                  ))
+                              .toList(),
+                        )
+                      : SizedBox(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Thứ 5",
+                    style: GoogleFonts.inter(
+                        fontSize: 18, fontWeight: FontWeight.w400),
+                  ),
+                  Divider(),
+                  _listTimings2 != null
+                      ? Column(
+                          children: _listTimings5
+                              .map((e) => ContainerTimings(
+                                    getTimingsOtd: e,
+                                    id: widget.id,
+                                  ))
+                              .toList(),
+                        )
+                      : SizedBox(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Thứ 6",
+                    style: GoogleFonts.inter(
+                        fontSize: 18, fontWeight: FontWeight.w400),
+                  ),
+                  Divider(),
+                  _listTimings2 != null
+                      ? Column(
+                          children: _listTimings6
+                              .map((e) => ContainerTimings(
+                                    getTimingsOtd: e,
+                                    id: widget.id,
+                                  ))
+                              .toList(),
+                        )
+                      : SizedBox(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Thứ 7",
+                    style: GoogleFonts.inter(
+                        fontSize: 18, fontWeight: FontWeight.w400),
+                  ),
+                  Divider(),
+                  _listTimings2 != null
+                      ? Column(
+                          children: _listTimings7
+                              .map((e) => ContainerTimings(
+                                    getTimingsOtd: e,
+                                    id: widget.id,
+                                  ))
+                              .toList(),
+                        )
+                      : SizedBox(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Chủ nhật",
+                    style: GoogleFonts.inter(
+                        fontSize: 18, fontWeight: FontWeight.w400),
+                  ),
+                  Divider(),
+                  _listTimings2 != null
+                      ? Column(
+                          children: _listTimingsCN
+                              .map((e) => ContainerTimings(
+                                    getTimingsOtd: e,
+                                    id: widget.id,
+                                  ))
+                              .toList(),
+                        )
+                      : SizedBox(),
+                ]),
+              ),
             ),
           ),
         ),

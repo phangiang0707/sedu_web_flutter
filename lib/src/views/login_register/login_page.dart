@@ -45,90 +45,93 @@ class _Login_pageState extends State<Login_page> {
           width: double.infinity,
           height: double.infinity,
           //padding: EdgeInsets.symmetric(vertical: 150),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 50,
-              ),
-              Align(
-                  alignment: Alignment.center,
-                  child: Image.asset('images/logo__image.png')),
-              Column(
-                children: [
-                  Text(
-                    "Login",
-                    style: GoogleFonts.inter(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                        color: Color.fromRGBO(23, 161, 250, 1)),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: 400,
-                    child: TextFormField(
-                      controller: _txtEmail,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              width: 1,
-                              color: Color.fromRGBO(
-                                  23, 161, 250, 1)), //<-- SEE HERE
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        labelText: "Email",
-                        border: const OutlineInputBorder(),
-                        hintText: "Email",
-                      ),
-                      keyboardType: TextInputType.emailAddress,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 50,
+                ),
+                Align(
+                    alignment: Alignment.center,
+                    child: Image.asset('images/logo__image.png')),
+                Column(
+                  children: [
+                    Text(
+                      "Login",
+                      style: GoogleFonts.inter(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromRGBO(23, 161, 250, 1)),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      isEmail(_txtEmail.text)
-                          ? _loginController!
-                              .login(_txtEmail.text)
-                              .then((value) {
-                              if (value != null) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const MyHomePage()));
-                              } else {
-                                print('Error');
-                              }
-                            })
-                          : print("Error email");
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      width: 200,
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: const Color.fromRGBO(23, 161, 250, 1)),
-                      child: Text(
-                        "Đăng nhập",
-                        style: GoogleFonts.inter(
-                            fontSize: 26,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: 400,
+                      child: TextFormField(
+                        controller: _txtEmail,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                width: 1,
+                                color: Color.fromRGBO(
+                                    23, 161, 250, 1)), //<-- SEE HERE
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                width: 1,
+                                color: Color.fromRGBO(23, 161, 250, 1)),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          labelText: "Email",
+                          border: const OutlineInputBorder(),
+                          hintText: "Email",
+                        ),
+                        keyboardType: TextInputType.emailAddress,
                       ),
                     ),
-                  )
-                ],
-              ),
-            ],
+                    SizedBox(
+                      height: 20,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        isEmail(_txtEmail.text)
+                            ? _loginController!
+                                .login(_txtEmail.text)
+                                .then((value) {
+                                if (value != null) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const MyHomePage()));
+                                } else {
+                                  print('Error');
+                                }
+                              })
+                            : print("Error email");
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: 200,
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: const Color.fromRGBO(23, 161, 250, 1)),
+                        child: Text(
+                          "Đăng nhập",
+                          style: GoogleFonts.inter(
+                              fontSize: 26,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
           )),
     );
   }

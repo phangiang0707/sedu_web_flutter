@@ -35,78 +35,83 @@ class _Teacher_pageState extends State<Teacher_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: SingleChildScrollView(
         child: Container(
-          width: 500,
-          child: RefreshIndicator(
-            key: _refreshIndicatorKey,
-            onRefresh: () async {
-              _getTeacherController!.getTeacher(widget.id).then((value) {
-                setState(() {
-                  _listTeacherOtd = value;
-                });
-              });
-            },
-            child: Column(
-              children: [
-                Row(
+          width: double.infinity,
+          child: Center(
+            child: Container(
+              width: 500,
+              child: RefreshIndicator(
+                key: _refreshIndicatorKey,
+                onRefresh: () async {
+                  _getTeacherController!.getTeacher(widget.id).then((value) {
+                    setState(() {
+                      _listTeacherOtd = value;
+                    });
+                  });
+                },
+                child: Column(
                   children: [
-                    Text(
-                      "Danh sách giáo viên",
-                      style: GoogleFonts.inter(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AddTeacher_page(
-                                        id: widget.id,
-                                      )));
-                        },
-                        child: Text(
-                          "Thêm giáo viên",
+                    Row(
+                      children: [
+                        Text(
+                          "Danh sách giáo viên",
                           style: GoogleFonts.inter(
-                              fontSize: 16,
+                              fontSize: 24,
                               fontWeight: FontWeight.w700,
-                              color: Color.fromRGBO(23, 161, 250, 1)),
-                        )),
-                    TextButton(
-                        onPressed: () {
-                          _refreshIndicatorKey.currentState?.show();
-                        },
-                        child: Text("Tải lại",
-                            style: GoogleFonts.inter(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: Color.fromRGBO(23, 161, 250, 1)))),
+                              color: Colors.black),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AddTeacher_page(
+                                            id: widget.id,
+                                          )));
+                            },
+                            child: Text(
+                              "Thêm giáo viên",
+                              style: GoogleFonts.inter(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color.fromRGBO(23, 161, 250, 1)),
+                            )),
+                        TextButton(
+                            onPressed: () {
+                              _refreshIndicatorKey.currentState?.show();
+                            },
+                            child: Text("Tải lại",
+                                style: GoogleFonts.inter(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color.fromRGBO(23, 161, 250, 1)))),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    _listTeacherOtd != null
+                        ? Container(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                  children: _listTeacherOtd!
+                                      .map((e) => ContainerTeacher(
+                                            getTeacherOtd: e,
+                                            id: widget.id,
+                                          ))
+                                      .toList()),
+                            ),
+                          )
+                        : CircularProgressIndicator()
                   ],
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                _listTeacherOtd != null
-                    ? Container(
-                        child: SingleChildScrollView(
-                          child: Column(
-                              children: _listTeacherOtd!
-                                  .map((e) => ContainerTeacher(
-                                        getTeacherOtd: e,
-                                        id: widget.id,
-                                      ))
-                                  .toList()),
-                        ),
-                      )
-                    : CircularProgressIndicator()
-              ],
+              ),
             ),
           ),
         ),

@@ -14,6 +14,7 @@ class PostCourseOtd {
   String description;
   String rules;
   int price;
+  String imageUrl;
   String categoryId;
   DateTime startDate;
   DateTime endDate;
@@ -23,6 +24,7 @@ class PostCourseOtd {
     required this.description,
     required this.rules,
     required this.price,
+    required this.imageUrl,
     required this.categoryId,
     required this.startDate,
     required this.endDate,
@@ -33,6 +35,7 @@ class PostCourseOtd {
         description: json["description"],
         rules: json["rules"],
         price: json["price"],
+        imageUrl: json["imageUrl"],
         categoryId: json["categoryId"],
         startDate: DateTime.parse(json["startDate"]),
         endDate: DateTime.parse(json["endDate"]),
@@ -43,6 +46,7 @@ class PostCourseOtd {
         "description": description,
         "rules": rules,
         "price": price,
+        "imageUrl": imageUrl,
         "categoryId": categoryId,
         "startDate": startDate.toIso8601String(),
         "endDate": endDate.toIso8601String(),

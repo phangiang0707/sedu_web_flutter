@@ -29,104 +29,109 @@ class _FixCategory_pageState extends State<FixCategory_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.symmetric(vertical: 20),
-          width: 500,
-          child: Column(children: [
-            Row(
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(Icons.arrow_back_ios_new_outlined)),
-                Text(
-                  "Danh mục",
-                  style: GoogleFonts.inter(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black),
+          width: double.infinity,
+          child: Center(
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 20),
+              width: 500,
+              child: Column(children: [
+                Row(
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pop(context, 'refresh');
+                        },
+                        icon: Icon(Icons.arrow_back_ios_new_outlined)),
+                    Text(
+                      "Danh mục",
+                      style: GoogleFonts.inter(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextFormField(
-              controller: _txtName,
-              decoration: InputDecoration(
-                // enabledBorder: OutlineInputBorder(
-                //   borderSide: BorderSide(
-                //       width: 1,
-                //       color: Color.fromRGBO(23, 161, 250, 1)), //<-- SEE HERE
-                //   borderRadius: BorderRadius.circular(15),
-                // ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
-                  borderRadius: BorderRadius.circular(15),
+                SizedBox(
+                  height: 10,
                 ),
-                labelText: "Tên danh mục",
-                border: OutlineInputBorder(),
-                hintText: "Tên danh mục",
-              ),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextFormField(
-              controller: _txtDescription,
-              decoration: InputDecoration(
-                // enabledBorder: OutlineInputBorder(
-                //   borderSide: BorderSide(
-                //       width: 1,
-                //       color: Color.fromRGBO(23, 161, 250, 1)), //<-- SEE HERE
-                //   borderRadius: BorderRadius.circular(15),
-                // ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
-                  borderRadius: BorderRadius.circular(15),
+                TextFormField(
+                  controller: _txtName,
+                  decoration: InputDecoration(
+                    // enabledBorder: OutlineInputBorder(
+                    //   borderSide: BorderSide(
+                    //       width: 1,
+                    //       color: Color.fromRGBO(23, 161, 250, 1)), //<-- SEE HERE
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    labelText: "Tên danh mục",
+                    border: OutlineInputBorder(),
+                    hintText: "Tên danh mục",
+                  ),
+                  keyboardType: TextInputType.emailAddress,
                 ),
-                labelText: "Miêu tả",
-                border: OutlineInputBorder(),
-                hintText: "Miêu tả",
-              ),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            InkWell(
-              onTap: () {
-                putCategoryControllerr!
-                    .putCategory(widget.categoryOtd.id, _txtName.text,
-                        _txtDescription.text)
-                    .then((value) {
-                  if (value != null) {
-                    Navigator.pop(context);
-                  }
-                });
-              },
-              child: Container(
-                width: 100,
-                height: 30,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color.fromRGBO(23, 161, 250, 1)),
-                child: Text(
-                  "Sửa",
-                  style: GoogleFonts.inter(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white),
+                SizedBox(
+                  height: 10,
                 ),
-              ),
-            )
-          ]),
+                TextFormField(
+                  controller: _txtDescription,
+                  decoration: InputDecoration(
+                    // enabledBorder: OutlineInputBorder(
+                    //   borderSide: BorderSide(
+                    //       width: 1,
+                    //       color: Color.fromRGBO(23, 161, 250, 1)), //<-- SEE HERE
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1, color: Color.fromRGBO(23, 161, 250, 1)),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    labelText: "Miêu tả",
+                    border: OutlineInputBorder(),
+                    hintText: "Miêu tả",
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                InkWell(
+                  onTap: () {
+                    putCategoryControllerr!
+                        .putCategory(widget.categoryOtd.id, _txtName.text,
+                            _txtDescription.text)
+                        .then((value) {
+                      if (value != null) {
+                        Navigator.pop(context, 'refresh');
+                      }
+                    });
+                  },
+                  child: Container(
+                    width: 100,
+                    height: 30,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Color.fromRGBO(23, 161, 250, 1)),
+                    child: Text(
+                      "Sửa",
+                      style: GoogleFonts.inter(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white),
+                    ),
+                  ),
+                )
+              ]),
+            ),
+          ),
         ),
       ),
     );
